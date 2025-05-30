@@ -1,0 +1,6 @@
+@MigrationTask_HostAddress = http://localhost:5169
+
+GET {{MigrationTask_HostAddress}}/Products/
+Accept: application/json
+
+###
