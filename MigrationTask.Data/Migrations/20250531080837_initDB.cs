@@ -36,7 +36,7 @@ namespace MigrationTask.Data.Migrations
                     ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StockQuantity = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -65,11 +65,11 @@ namespace MigrationTask.Data.Migrations
                 columns: new[] { "ProductId", "CategoryId", "Price", "ProductDescription", "ProductName", "Status", "StockQuantity" },
                 values: new object[,]
                 {
-                    { 1, 1, 1000.00m, "Devices and gadgets", "Electronics", true, 50 },
-                    { 2, 2, 1000.00m, "Devices and Devices", "Devices Devices ", true, 50 },
-                    { 3, 1, 1000.00m, "Electronics", "Electronics Electronics ", false, 50 },
-                    { 4, 1, 1000.00m, "Electronics", "Electronics Electronics ", false, 50 },
-                    { 5, 1, 1000.00m, "Electronics", "Electronics Electronics ", false, 50 }
+                    { 1, 1, 1000.00m, "Devices and gadgets", "Electronics", 0, 50 },
+                    { 2, 2, 1000.00m, "Devices and Devices", "Devices Devices ", 0, 50 },
+                    { 3, 1, 1000.00m, "Electronics", "Electronics Electronics ", 1, 50 },
+                    { 4, 1, 1000.00m, "Electronics", "Electronics Electronics ", 1, 50 },
+                    { 5, 1, 1000.00m, "Electronics", "Electronics Electronics ", 1, 50 }
                 });
 
             migrationBuilder.CreateIndex(

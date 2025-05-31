@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Migration_Task.Data.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Migration_Task.Data.Entities
@@ -11,7 +12,7 @@ namespace Migration_Task.Data.Entities
         public string? ProductDescription { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
-        public bool Status { get; set; } //  Active,Inactive
+        public ProductStatusEnum Status { get; set; } //  Active,Inactive
 
         [ForeignKey("Category")]
         public int CategoryId { get; set; }

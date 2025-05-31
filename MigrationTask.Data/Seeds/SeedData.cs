@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Migration_Task.Data.Entities;
+using Migration_Task.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace MigrationTask.Data.Seeds
               ProductName = "Electronics",
               ProductDescription = "Devices and gadgets",
               CategoryId = 1,
-              Status = true,
+              Status = ProductStatusEnum.Active,
               Price = 1000.00M,
               StockQuantity = 50,
 
@@ -56,7 +57,7 @@ namespace MigrationTask.Data.Seeds
                   ProductName = "Devices Devices ",
                   ProductDescription = "Devices and Devices",
                   CategoryId = 2,
-                  Status = true,
+                  Status = ProductStatusEnum.Active,
                   Price = 1000.00M,
                   StockQuantity = 50,
 
@@ -67,7 +68,7 @@ namespace MigrationTask.Data.Seeds
                       ProductName = "Electronics Electronics ",
                       ProductDescription = "Electronics",
                       CategoryId = 1,
-                      Status = false,
+                      Status = ProductStatusEnum.Inactive,
                       Price = 1000.00M,
                       StockQuantity = 50,
 
@@ -78,7 +79,7 @@ namespace MigrationTask.Data.Seeds
                          ProductName = "Electronics Electronics ",
                          ProductDescription = "Electronics",
                          CategoryId = 1,
-                         Status = false,
+                         Status = ProductStatusEnum.Inactive,
                          Price = 1000.00M,
                          StockQuantity = 50,
 
@@ -89,7 +90,7 @@ namespace MigrationTask.Data.Seeds
                             ProductName = "Electronics Electronics ",
                             ProductDescription = "Electronics",
                             CategoryId = 1,
-                            Status = false,
+                            Status = ProductStatusEnum.Inactive,
                             Price = 1000.00M,
                             StockQuantity = 50,
 

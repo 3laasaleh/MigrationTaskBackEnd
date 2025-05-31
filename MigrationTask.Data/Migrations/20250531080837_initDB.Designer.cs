@@ -11,7 +11,7 @@ using Migration_Task.Data;
 namespace MigrationTask.Data.Migrations
 {
     [DbContext(typeof(MigrationTaskContext))]
-    [Migration("20250530152913_initDB")]
+    [Migration("20250531080837_initDB")]
     partial class initDB
     {
         /// <inheritdoc />
@@ -83,8 +83,8 @@ namespace MigrationTask.Data.Migrations
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
@@ -103,7 +103,7 @@ namespace MigrationTask.Data.Migrations
                             Price = 1000.00m,
                             ProductDescription = "Devices and gadgets",
                             ProductName = "Electronics",
-                            Status = true,
+                            Status = 0,
                             StockQuantity = 50
                         },
                         new
@@ -113,7 +113,7 @@ namespace MigrationTask.Data.Migrations
                             Price = 1000.00m,
                             ProductDescription = "Devices and Devices",
                             ProductName = "Devices Devices ",
-                            Status = true,
+                            Status = 0,
                             StockQuantity = 50
                         },
                         new
@@ -123,7 +123,7 @@ namespace MigrationTask.Data.Migrations
                             Price = 1000.00m,
                             ProductDescription = "Electronics",
                             ProductName = "Electronics Electronics ",
-                            Status = false,
+                            Status = 1,
                             StockQuantity = 50
                         },
                         new
@@ -133,7 +133,7 @@ namespace MigrationTask.Data.Migrations
                             Price = 1000.00m,
                             ProductDescription = "Electronics",
                             ProductName = "Electronics Electronics ",
-                            Status = false,
+                            Status = 1,
                             StockQuantity = 50
                         },
                         new
@@ -143,7 +143,7 @@ namespace MigrationTask.Data.Migrations
                             Price = 1000.00m,
                             ProductDescription = "Electronics",
                             ProductName = "Electronics Electronics ",
-                            Status = false,
+                            Status = 1,
                             StockQuantity = 50
                         });
                 });

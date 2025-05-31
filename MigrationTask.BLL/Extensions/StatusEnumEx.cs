@@ -3,12 +3,19 @@
 
 namespace MigrationTask.BLL.Extensions
 {
-    public static class productStatusEnumEx
+    public static class ProductStatusEnumEx
     {
-        public static bool GetBoolValue(this ProductStatusEnum status)
+    
+        public static string GetName(this ProductStatusEnum name)
         {
-            return status == 0 ? true : false; ;
+            return Enum.GetName(typeof(ProductStatusEnum), name) ?? string.Empty;
         }
+
+        public static ProductStatusEnum GetProductStatusEnum(this bool status)
+        {
+            return status ? ProductStatusEnum.Active : ProductStatusEnum.Inactive; ;
+        }
+ 
     }
 
 }

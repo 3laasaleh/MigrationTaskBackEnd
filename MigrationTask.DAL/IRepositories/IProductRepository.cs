@@ -8,9 +8,9 @@ namespace MigrationTask.DAL.IRepositories
     {
         public Task<IEnumerable<Product>> GetProductsAsync();
         public Task<Product?> GetProductByIdAsync(int Id);
-        public Task AddProductAsync(Product product);
-        public Task UpdateProductAsync(Product product);
-        public Task DeleteProductAsync(Product product);
+        public Task<Product?> AddProductAsync(Product product);
+        public Task<Product?> UpdateProductAsync(Product product);
+        public Task<bool> DeleteProductAsync(Product product);
 
     }
 }

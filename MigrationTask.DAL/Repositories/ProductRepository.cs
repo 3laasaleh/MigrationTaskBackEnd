@@ -14,37 +14,39 @@ namespace MigrationTask.DAL.Repositories
         {
             _db = context;
         }
-        public async Task AddProductAsync(Product product)
+        public async Task<Product?> AddProductAsync(Product product)
         {
-            await _db.Products.AddAsync(product);
-            await _db.SaveChangesAsync();
+         var res=  await _db.Products.AddAsync(product);
+             await _db.SaveChangesAsync();
+            return res.Entity;
 
         }
 
-        public async Task DeleteProductAsync(Product product)
+        public async Task<bool> DeleteProductAsync(Product product)
         {
-            if (product != null)
-            {
+        
                 _db.Products.Remove(product);
-                await _db.SaveChangesAsync();
-            }
+              var res=  await _db.SaveChangesAsync();
+            return res > 0 ?true:false;
         }
 
         public async Task<Product?> GetProductByIdAsync(int Id)
         {
-            return await _db.Products.FindAsync(Id);
+            return await _db.Products.Include(s=>s.Category).SingleOrDefaultAsync(s=>s.ProductId==Id);
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
-            return await _db.Products.AsNoTracking().ToListAsync();
+            return await _db.Products.Include(s=>s.Category).AsNoTracking().ToListAsync();
+            // to solve the issue of tracking changes, while update enties
 
         }
 
-        public async Task UpdateProductAsync(Product product)
+        public async Task<Product?> UpdateProductAsync(Product product)
         {
             _db.Entry(product).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
+          var res=  await _db.SaveChangesAsync();
+            return res > 0 ? product : null ;
         }
     }
 }

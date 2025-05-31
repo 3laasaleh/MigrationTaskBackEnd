@@ -4,10 +4,10 @@ namespace MigrationTask.BLL.Interfaces
 {
     public interface IProductService
     {
-        public Task<IEnumerable<ProductDto>> GetAllProductsAsync();
-        public Task<ProductDto?> GetProductByIdAsync(int Id);
-        public Task AddProductAsync(ProductDto product);
-        public Task UpdateProductAsync(ProductDto product);
-        public Task DeleteProductAsync(int Id);
+         Task<IGenericResponse<IEnumerable<ProductDto>>> GetAllProductsAsync();
+         Task<IGenericResponse<ProductDto?>> GetProductByIdAsync(int Id);
+          Task<IGenericResponse<ProductDto?>>  AddProductAsync(ProductDto product);
+         Task<IGenericResponse<ProductDto?>> UpdateProductAsync(ProductDto product);
+         Task<IGenericResponse<bool>> DeleteProductAsync(int Id);
     }
 }

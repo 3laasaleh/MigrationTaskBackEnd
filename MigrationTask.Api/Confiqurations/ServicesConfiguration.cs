@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using MigrationTask.Data.IdentityContext;
 using System.Text;
 
 namespace Migration_Task.Confiqurations
@@ -7,7 +9,7 @@ namespace Migration_Task.Confiqurations
     public static class ServicesConfiguration
     {
 
-        public static void ConfigureCrosConfiguration(this IServiceCollection services)
+        public static void AddCrosConfiguration(this IServiceCollection services)
         {
 
 
@@ -20,27 +22,29 @@ namespace Migration_Task.Confiqurations
 
         }
 
-        public static void JWTConfig(this IServiceCollection services, IConfiguration Configuration)
+        public static void AddJwtIdentityConfig(this IServiceCollection services, IConfiguration Configuration)
         {
             // configure jwt authentication
-            var appSettings = Configuration.GetValue<string>("secret");
-            var key = Encoding.ASCII.GetBytes(appSettings);
-            services.AddAuthentication(x =>
+            // Add Identity (no UI needed)
+            var key = Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]);
+
+            // Add JWT Authentication
+            services.AddAuthentication(options =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(x =>
+            .AddJwtBearer(options =>
             {
-                x.RequireHttpsMetadata = true;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ClockSkew = TimeSpan.Zero // Remove delay of token when expire
-
-
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
                 };
             });
 

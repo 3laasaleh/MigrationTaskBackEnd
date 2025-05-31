@@ -16,13 +16,15 @@ namespace MigrationTask.BLL.Services
         {
             _CategoryRepository = CategoryRepository;
             _logger = logger;
+            _mapper = mapper;
         }
-        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync()
+        public async Task<IGenericResponse<IEnumerable<CategoryDto>>> GetAllCategoriesAsync()
         {
             try
             {
                 var data = await _CategoryRepository.GetCategoriesAsync();
-                return _mapper.Map<IEnumerable<CategoryDto>>(data);
+                var res= _mapper.Map<IEnumerable<CategoryDto>>(data);
+                return new GenericResponse<IEnumerable<CategoryDto>>(res);
 
             }
             catch (Exception e)
@@ -31,5 +33,7 @@ namespace MigrationTask.BLL.Services
                 throw;
             }
         }
+
+  
     }
 }
